@@ -1,6 +1,6 @@
 package racingcar.view
 
-import racingcar.MoveHistory
+import racingcar.domain.MoveHistory
 
 class ResultView(private val tryCount: Int, private val moveHistories: MutableList<MoveHistory>) {
     fun showRaceResult() {

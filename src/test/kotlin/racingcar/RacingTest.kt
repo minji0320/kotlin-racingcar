@@ -2,6 +2,8 @@ package racingcar
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import racingcar.domain.MoveHistory
+import racingcar.domain.RacingGame
 
 class RacingTest {
     private val racingGame = RacingGame()

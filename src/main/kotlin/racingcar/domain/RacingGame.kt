@@ -1,4 +1,4 @@
-package racingcar
+package racingcar.domain
 
 import kotlin.random.Random
 
@@ -7,10 +7,7 @@ class RacingGame {
 
     fun startRace(carCount: Int, tryCount: Int): MutableList<MoveHistory> {
         for (carIdx in 0 until carCount) {
-            moveHistories.add(MoveHistory())
-            for (round in 0 until tryCount) {
-                moveHistories[carIdx].log(getMoveDistance())
-            }
+            moveCar(carIdx, tryCount)
         }
 
         return moveHistories
@@ -26,5 +23,12 @@ class RacingGame {
 
     fun isMove(randomNum: Int): Boolean {
         return randomNum >= 4
+    }
+
+    private fun moveCar(carIdx: Int, tryCount: Int) {
+        moveHistories.add(MoveHistory())
+        for (round in 0 until tryCount) {
+            moveHistories[carIdx].log(getMoveDistance())
+        }
     }
 }
