@@ -5,6 +5,7 @@ private val CAR_NAMES_VALIDATION_ERROR =
     IllegalArgumentException("자동차 이름은 1 ~ 5자로 입력해야 하며, \'이름1,이름2\'와 같은 형식으로 입력해야 합니다.")
 private val TRY_COUNT_VALIDATION_ERROR = IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.")
 private val CAR_NAMES_REGEX = "\\w{1,5}(,\\w{1,5})+".toRegex()
+private const val MIN_TRY_COUNT = 1
 
 class InputView {
     fun readCarNames(): MutableList<String> {
@@ -28,7 +29,7 @@ class InputView {
     }
 
     fun validateTryCount(input: Int): Int {
-        if (input <= 0)
+        if (input < MIN_TRY_COUNT)
             throw TRY_COUNT_VALIDATION_ERROR
         return input
     }

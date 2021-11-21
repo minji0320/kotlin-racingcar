@@ -11,7 +11,7 @@ class ResultView() {
         cars.forEach {
             println(getProgressBar(it))
         }
-        println("")
+        println()
     }
 
     fun showWinner(winners: MutableList<String>) {

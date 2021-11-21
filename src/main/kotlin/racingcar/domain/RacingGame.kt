@@ -2,9 +2,13 @@ package racingcar.domain
 
 import kotlin.random.Random
 
+private const val FORWARD_NUMBER = 4
+private const val GO = 1
+private const val STOP = 0
+
 class RacingGame(private val carNames: MutableList<String>) {
     val cars: MutableList<Car> = ArrayList()
-    private var maxDistance = 0
+    private var maxDistance = Car.INIT_POSITION
     private var winners = mutableListOf<String>()
 
     fun initCars() {
@@ -22,15 +26,15 @@ class RacingGame(private val carNames: MutableList<String>) {
     }
 
     private fun getMoveDistance(): Int {
-        return if (isMove(getRandomNum())) 1 else 0
+        return if (isMove(getRandomNum())) GO else STOP
     }
 
     fun isMove(randomNum: Int): Boolean {
-        return randomNum >= 4
+        return randomNum >= FORWARD_NUMBER
     }
 
     fun getRandomNum(): Int {
-        return Random.nextInt(10)
+        return Random.nextInt(UNTIL_RANDOM_NUMBER)
     }
 
     fun getCarCount(): Int {
@@ -51,5 +55,10 @@ class RacingGame(private val carNames: MutableList<String>) {
         } else if (maxDistance == car.position) {
             winners.add(car.name)
         }
+    }
+
+    companion object {
+        const val MIN_RANDOM_NUMBER = 0
+        const val UNTIL_RANDOM_NUMBER = 10
     }
 }

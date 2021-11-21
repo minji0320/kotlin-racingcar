@@ -2,6 +2,8 @@ package racingcar
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 import racingcar.domain.RacingGame
 import racingcar.view.ResultView
 
@@ -12,22 +14,20 @@ class RacingTest {
 
     @Test
     fun `랜덤 숫자가 0에서 9 사이의 값인지 체크`() {
-        assertThat(racingGame.getRandomNum()).isGreaterThanOrEqualTo(0)
-        assertThat(racingGame.getRandomNum()).isLessThan(10)
+        assertThat(racingGame.getRandomNum()).isGreaterThanOrEqualTo(RacingGame.MIN_RANDOM_NUMBER)
+        assertThat(racingGame.getRandomNum()).isLessThan(RacingGame.UNTIL_RANDOM_NUMBER)
     }
 
-    @Test
-    fun `랜덤 숫자에 따른 이동 여부 체크`() {
-        assertThat(racingGame.isMove(0)).isFalse
-        assertThat(racingGame.isMove(1)).isFalse
-        assertThat(racingGame.isMove(2)).isFalse
-        assertThat(racingGame.isMove(3)).isFalse
-        assertThat(racingGame.isMove(4)).isTrue
-        assertThat(racingGame.isMove(5)).isTrue
-        assertThat(racingGame.isMove(6)).isTrue
-        assertThat(racingGame.isMove(7)).isTrue
-        assertThat(racingGame.isMove(8)).isTrue
-        assertThat(racingGame.isMove(9)).isTrue
+    @ParameterizedTest
+    @ValueSource(ints = [0, 1, 2, 3])
+    fun `랜덤 숫자가 0 ~ 3 사이인 경우 멈춘다`(input: Int) {
+        assertThat(racingGame.isMove(input)).isFalse
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = [4, 5, 6, 7, 8, 9])
+    fun `랜덤 숫자가 4 ~ 9 사이인 경우 이동한다`(input: Int) {
+        assertThat(racingGame.isMove(input)).isTrue
     }
 
     @Test
