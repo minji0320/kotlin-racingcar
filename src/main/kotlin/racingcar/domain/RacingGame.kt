@@ -49,7 +49,7 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
         return cars.size
     }
 
-    private fun getWinners(): MutableList<String> {
+    fun getWinners(): MutableList<String> {
         cars.forEach {
             findWinner(it)
         }
