@@ -1,19 +1,16 @@
 package racingcar.view
 
-import racingcar.domain.MoveHistory
+import racingcar.domain.Car
 
-class ResultView(private val tryCount: Int, private val moveHistories: MutableList<MoveHistory>) {
-    fun showRaceResult() {
+class ResultView() {
+    fun showStartRace() {
         println("실행결과")
-        for (idx in 0 until tryCount) {
-            showRaceResultByIndex(idx)
-            println("")
-        }
     }
 
-    private fun showRaceResultByIndex(idx: Int) {
-        moveHistories.forEach {
-            println(it.getProgressBar(idx))
+    fun showNowRaceResult(cars: MutableList<Car>) {
+        cars.forEach {
+            println("${it.name} : ${it.getProgressBar()}")
         }
+        println("")
     }
 }
