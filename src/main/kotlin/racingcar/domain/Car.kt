@@ -7,8 +7,4 @@ class Car(val name: String) {
     fun move(distance: Int) {
         position += distance
     }
-
-    fun getProgressBar(): String {
-        return "$name : " + "-".repeat(position)
-    }
 }

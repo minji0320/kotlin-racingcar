@@ -1,25 +1,11 @@
 package racingcar.domain
 
-import racingcar.view.ResultView
 import kotlin.random.Random
 
-class RacingGame(private val carNames: MutableList<String>, private val tryCount: Int) {
+class RacingGame(private val carNames: MutableList<String>) {
     val cars: MutableList<Car> = ArrayList()
-    private val resultView = ResultView()
     private var maxDistance = 0
     private var winners = mutableListOf<String>()
-
-    fun startRace() {
-        initCars()
-
-        resultView.showStartRace()
-        for (i in 0 until tryCount) {
-            moveCars()
-            resultView.showNowRaceResult(cars)
-        }
-
-        resultView.showWinner(getWinners())
-    }
 
     fun initCars() {
         carNames.forEach {
@@ -27,10 +13,12 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
         }
     }
 
-    private fun moveCars() {
+    fun moveCars(): MutableList<Car> {
         cars.forEach {
             it.move(getMoveDistance())
         }
+
+        return cars
     }
 
     private fun getMoveDistance(): Int {

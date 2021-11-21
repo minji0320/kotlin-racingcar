@@ -3,10 +3,12 @@ package racingcar
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import racingcar.domain.RacingGame
+import racingcar.view.ResultView
 
 class RacingTest {
     private val carNames = mutableListOf("a", "b", "c")
-    private val racingGame = RacingGame(carNames, 3)
+    private val racingGame = RacingGame(carNames)
+    private val resultView = ResultView()
 
     @Test
     fun `랜덤 숫자가 0에서 9 사이의 값인지 체크`() {
@@ -47,7 +49,7 @@ class RacingTest {
         firstCar.move(1)
         firstCar.move(0)
         firstCar.move(1)
-        assertThat(firstCar.getProgressBar()).isEqualTo("a : ----")
+        assertThat(resultView.getProgressBar(firstCar)).isEqualTo("a : ----")
     }
 
     @Test
