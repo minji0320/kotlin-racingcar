@@ -2,15 +2,17 @@ package racingcar.domain
 
 import kotlin.random.Random
 
-class RacingGame {
-    private val moveHistories: MutableList<MoveHistory> = ArrayList()
+class RacingGame(private val carNames: MutableList<String>, private val tryCount: Int) {
+    private val cars: MutableList<Car> = ArrayList()
 
-    fun startRace(carCount: Int, tryCount: Int): MutableList<MoveHistory> {
-        for (carIdx in 0 until carCount) {
-            moveCar(carIdx, tryCount)
+    fun startRace() {
+        initCars()
+    }
+
+    private fun initCars() {
+        carNames.forEach {
+            cars.add(Car(it))
         }
-
-        return moveHistories
     }
 
     fun getRandomNum(): Int {
@@ -26,9 +28,9 @@ class RacingGame {
     }
 
     private fun moveCar(carIdx: Int, tryCount: Int) {
-        moveHistories.add(MoveHistory())
-        for (round in 0 until tryCount) {
-            moveHistories[carIdx].log(getMoveDistance())
-        }
+        // moveHistories.add(MoveHistory())
+        // for (round in 0 until tryCount) {
+        //     moveHistories[carIdx].log(getMoveDistance())
+        // }
     }
 }
