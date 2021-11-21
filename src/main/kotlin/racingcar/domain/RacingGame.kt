@@ -4,7 +4,7 @@ import racingcar.view.ResultView
 import kotlin.random.Random
 
 class RacingGame(private val carNames: MutableList<String>, private val tryCount: Int) {
-    private val cars: MutableList<Car> = ArrayList()
+    val cars: MutableList<Car> = ArrayList()
     private val resultView = ResultView()
 
     fun startRace() {
@@ -17,7 +17,7 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
         }
     }
 
-    private fun initCars() {
+    fun initCars() {
         carNames.forEach {
             cars.add(Car(it))
         }
@@ -39,5 +39,9 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
 
     fun getRandomNum(): Int {
         return Random.nextInt(10)
+    }
+
+    fun getCarCount(): Int {
+        return cars.size
     }
 }

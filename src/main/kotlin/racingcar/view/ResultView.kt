@@ -9,7 +9,7 @@ class ResultView() {
 
     fun showNowRaceResult(cars: MutableList<Car>) {
         cars.forEach {
-            println("${it.name} : ${it.getProgressBar()}")
+            println(it.getProgressBar())
         }
         println("")
     }

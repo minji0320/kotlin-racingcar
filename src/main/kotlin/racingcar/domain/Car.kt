@@ -9,6 +9,6 @@ class Car(val name: String) {
     }
 
     fun getProgressBar(): String {
-        return "-".repeat(position)
+        return "$name : " + "-".repeat(position)
     }
 }

@@ -2,11 +2,11 @@ package racingcar
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import racingcar.domain.MoveHistory
 import racingcar.domain.RacingGame
 
 class RacingTest {
-    private val racingGame = RacingGame()
+    private val carNames = mutableListOf("a", "b", "c", "d", "e")
+    private val racingGame = RacingGame(carNames, 5)
 
     @Test
     fun `랜덤 숫자가 0에서 9 사이의 값인지 체크`() {
@@ -29,28 +29,24 @@ class RacingTest {
     }
 
     @Test
-    fun `자동차의 이동 이력을 정상적으로 저장하는지 체크`() {
-        val moveHistory = MoveHistory()
-        moveHistory.log(1)
-        moveHistory.log(1)
-        moveHistory.log(0)
-        moveHistory.log(1)
-        moveHistory.log(0)
-        assertThat(moveHistory.getHistorySize()).isEqualTo(5)
+    fun `자동차를 정상적으로 초기화하는지 체크`() {
+        racingGame.initCars()
+        assertThat(racingGame.getCarCount()).isEqualTo(5)
+
+        for (i in 0 until racingGame.getCarCount()) {
+            assertThat(carNames[i]).isEqualTo(racingGame.cars[i].name)
+        }
     }
 
     @Test
-    fun `자동차의 이동 이력을 정상적으로 출력하는지 체크`() {
-        val moveHistory = MoveHistory()
-        moveHistory.log(1)
-        moveHistory.log(1)
-        moveHistory.log(0)
-        moveHistory.log(1)
-        moveHistory.log(0)
-        assertThat(moveHistory.getProgressBar(0)).isEqualTo("-")
-        assertThat(moveHistory.getProgressBar(1)).isEqualTo("--")
-        assertThat(moveHistory.getProgressBar(2)).isEqualTo("--")
-        assertThat(moveHistory.getProgressBar(3)).isEqualTo("---")
-        assertThat(moveHistory.getProgressBar(4)).isEqualTo("---")
+    fun `자동차의 이름과 현재 위치를 정상적으로 출력하는지 체크`() {
+        racingGame.initCars()
+        val firstCar = racingGame.cars[0] // "자동차 a"
+        firstCar.move(1)
+        firstCar.move(1)
+        firstCar.move(1)
+        firstCar.move(0)
+        firstCar.move(1)
+        assertThat(firstCar.getProgressBar()).isEqualTo("a : ----")
     }
 }
