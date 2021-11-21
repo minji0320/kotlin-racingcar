@@ -6,6 +6,8 @@ import kotlin.random.Random
 class RacingGame(private val carNames: MutableList<String>, private val tryCount: Int) {
     val cars: MutableList<Car> = ArrayList()
     private val resultView = ResultView()
+    private var maxDistance = 0
+    private var winners = mutableListOf<String>()
 
     fun startRace() {
         initCars()
@@ -15,6 +17,8 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
             moveCars()
             resultView.showNowRaceResult(cars)
         }
+
+        resultView.showWinner(getWinners())
     }
 
     fun initCars() {
@@ -43,5 +47,21 @@ class RacingGame(private val carNames: MutableList<String>, private val tryCount
 
     fun getCarCount(): Int {
         return cars.size
+    }
+
+    private fun getWinners(): MutableList<String> {
+        cars.forEach {
+            findWinner(it)
+        }
+        return winners
+    }
+
+    private fun findWinner(car: Car) {
+        if (maxDistance < car.position) {
+            maxDistance = car.position
+            winners = mutableListOf(car.name)
+        } else if (maxDistance == car.position) {
+            winners.add(car.name)
+        }
     }
 }
